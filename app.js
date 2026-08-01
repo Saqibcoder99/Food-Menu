@@ -215,8 +215,8 @@
 //   }
 // ];
 async function dishesApi() {
-  const response= await fetch("https://dummyjson.com/recipes")
-  const data = await response.json();  
+  const response= await fetch("https://dummyjson.com/recipes?limit=50")
+  const data = await response.json();    
   renderDish(data.recipes)   
 }
 dishesApi()
@@ -312,7 +312,7 @@ return `    <div class="food-card">
 }
 
 let searchHandler=async()=>{
-   const response= await fetch("https://dummyjson.com/recipes")
+   const response= await fetch("https://dummyjson.com/recipes?limit=50")
   const data = await response.json();  
   if (!input.value.trim()) return alert("please fill the input...");
   let searchValue = input.value;
@@ -335,7 +335,7 @@ let searchHandler=async()=>{
 
 };
 const menu = async(category) => {
-   const response= await fetch("https://dummyjson.com/recipes")
+   const response= await fetch("https://dummyjson.com/recipes?limit=50")
   const data = await response.json();
   
 
@@ -365,9 +365,10 @@ function setActive(activeCard) {
 
 searchBtn.addEventListener("click",searchHandler)
 all.addEventListener("click",()=>{
+    visibleDish="4"
       dishesApi();  
       setActive(all);
-    viewBtn.style.display="block"
+    viewBtn.style.display="flex"
 
     })
 breakFast.addEventListener("click", () => {
@@ -403,7 +404,7 @@ dessert.addEventListener("click", () => {
     setActive(dessert);
 });
 viewBtn.addEventListener("click",async()=>{
-  const response= await fetch("https://dummyjson.com/recipes")
+  const response= await fetch("https://dummyjson.com/recipes?limit=50")
   const data = await response.json();
    visibleDish=data.recipes.length;
    dishesApi()
